@@ -1,3 +1,5 @@
+// Express  App Setup
+// -----------------------------------------------------------------------
 var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
@@ -7,7 +9,10 @@ var app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// -----------------------------------------------------------------------
 
+// MongoDB Setup
+// -----------------------------------------------------------------------
 mongoose.connect('mongodb://localhost/myCal');
 
 var db = mongoose.connection;
@@ -35,7 +40,10 @@ var eventSchema = mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 var Calendar = mongoose.model('Calendar', calendarSchema);
 var Event = mongoose.model('Event', eventSchema);
+// -----------------------------------------------------------------------
 
+// POST Request Implementation
+// -----------------------------------------------------------------------
 app.post('/api/1.0/users/new', function(req, res) {
 	if(req.body.username.length > 1) {
 		User.find({username: req.body.username}, function(error, result) {
@@ -88,7 +96,10 @@ app.post('/api/1.0/:user/event', function(req, res) {
 		});
 	}
 });
+// -----------------------------------------------------------------------
 
+// GET Request Implementation
+// -----------------------------------------------------------------------
 app.get('/api/1.0/users', function(req, res) {
 	User.find({}, function(error, result) {
 		if(error) { res.send('{"status":"error"}'); }
@@ -112,6 +123,10 @@ app.get('/api/1.0/:user/events', function(req, res) {
 		}
 	});
 });
+// -----------------------------------------------------------------------
+
+// Express Error Handling and Logging
+// -----------------------------------------------------------------------
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -143,6 +158,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
+// -----------------------------------------------------------------------
 
 module.exports = app;
