@@ -31,6 +31,7 @@ var calendarSchema = mongoose.Schema({
 
 var eventSchema = mongoose.Schema({
 	calendar: String,
+	name: String,
 	date: String,
 	start: String,
 	end: String,
@@ -82,6 +83,7 @@ app.post('/api/1.0/:user/event', function(req, res) {
 					else {
 						var newEvent = new Event({
 							calendar: calResult._id,
+							name: req.body.name,
 							date: req.body.date,
 							start: req.body.start,
 							end: req.body.end,
