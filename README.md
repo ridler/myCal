@@ -1,5 +1,15 @@
 # myCal
 A REST service to manage calendar events.
+
+## User Guide
+### Setup
+Use `npm install` to aquire dependencies.
+Run `npm start` to start the application.
+
+### Testing
+Run `NODE_ENV=test npm start` to start the server.
+Then run `node_modules/mocha/bin/mocha` to run the tests`
+
 ## API
 ### POST
 #### `/api/1.0/users/new` - Create a new user.
