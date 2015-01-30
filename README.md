@@ -8,7 +8,7 @@ Run `npm start` to start the application.
 
 ### Testing
 Run `NODE_ENV=test npm start` to start the server.
-Then run `node_modules/mocha/bin/mocha` to run the tests`
+Then run `npm test` to run the tests`
 
 ## API
 ### POST
