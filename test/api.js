@@ -61,6 +61,28 @@ describe('POST /:user/event', function() {
 	});
 });
 
+describe('GET /users', function() {
+	it('should return a list of all the users', function(done) {
+		request.get(base+'/users', function(error, response, body) {
+			if(error) { return done(error); }
+			JSON.parse(body).length.should.equal(2);
+			JSON.parse(body)[0].username.should.equal('beyonce');
+			done();
+		});
+	});
+});
+
+describe('GET /:user/events', function() {
+	it('should return a user\'s event(s)', function(done) {
+		request.get(base+'/beyonce/events', function(error, response, body) {
+			if(error) { return done(error); }
+			JSON.parse(body).length.should.equal(1);
+			JSON.parse(body)[0].name.should.equal('Surfboarding');
+			done();
+		});
+	});
+});
+
 describe('PUT /:user/edit', function() {
 	it('should give a user a new username', function(done) {
 		request.put(base+'/kanye/edit', {form: {newname: 'jay-z'}},
