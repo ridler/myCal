@@ -3,12 +3,16 @@ A REST service to manage calendar events.
 
 ## User Guide
 ### Setup
-Use `npm install` to aquire dependencies.
+Use `npm install` to aquire Node.js dependencies.
 Run `npm start` to start the application.
+
+__MongoDB is another dependency, and must be running on its default localhost development port__
 
 ### Testing
 Run `NODE_ENV=test npm start` to start the server.
 Then run `npm test` to run the tests`
+
+*Every time you re-run the tests, you must restart the server*
 
 ## API
 ### POST
