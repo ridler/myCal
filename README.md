@@ -13,8 +13,21 @@ A REST API to manage calendar events.
 
 ### `/api/1.0/:user/event` - Create a new event.
 - data:
+  - name: a string to name the event (less than 50 characters).
   - start: a time in hh:mm format (on a 24-hour clock).
   - end: a time in hh:mm format (on a 24-hour clock).
   - date: a date in mm-dd-yyyy format.
   - location: a location (less than 100 characters).
-- example: `curl --data "start=08:00"`
+- example: `curl --data "start=08:00&end=15:00&location=ECCR200&date=01-30-2014&name=Surfboard" http://localhost:3000/api/1.0/beyonce/event`
+- response: a JSON status indicator like `{"status":<type>}` with the following types:
+  - *success*: the event was successfully created.
+  - *bad<Data>Format*: the <data> type you provided does not meet the above criteria for <data>.
+  - *badUsername*: the user does not exist.
+  - *error*: there was an internal error in the application or database.  Sorry.
+
+### GET
+#### `/api/1.0/users` - Get a list of all users.
+This endpoint simply returns a list of all the users in JSON format.
+
+#### `/api/1.0/:user/events` - Get a list of a user's events.
+This endpoint simply returns a list of all the events for the given user in JSON format.
