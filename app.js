@@ -72,6 +72,7 @@ app.post('/api/1.0/:user/event', function(req, res) {
 	if(!dateCheck) { res.send('{"status":"badDateFormat"}'); }
 	else if(!startCheck || !endCheck) { res.send('{"status":"badTimeFormat"}'); }
 	else if(req.body.location.length > 100) { res.send('{"status":"badLocationFormat"}'); }
+	else if(req.body.name.length > 50) { res.send('{"status":"badLocationFormat"}'); }
 	else {
 		User.find({username: req.body.user}, function(error, calResult) {
 			var dead = false;
@@ -123,6 +124,29 @@ app.get('/api/1.0/:user/events', function(req, res) {
 				}
 			});
 		}
+	});
+});
+// -----------------------------------------------------------------------
+
+// PUT Request Implementation
+// -----------------------------------------------------------------------
+app.put('/api/1.0/:user/edit', function(req, res) {
+	User.update({username: req.params.user}, {username: req.body.newname},
+		function(error, number, result) {
+			if(error) { res.send('{"status":"error"}'); }
+			else if(number > 0) { res.send('{"status":"success"}'); }
+			else { res.send('{"status":"error"}'); }
+		});
+});
+// -----------------------------------------------------------------------
+
+// DELETE Request Implementation
+// -----------------------------------------------------------------------
+app.delete('/api/1.0/:user/remove', function(req, res) {
+	User.remove({username: req.params.user}, function(error, result) {
+		if(error) { res.send('{"status":"error"}'); }
+		else if(result > 0 ) { res.send('{"status":"success"}'); }
+		else { res.send('{"status":"error"}'); }
 	});
 });
 // -----------------------------------------------------------------------
