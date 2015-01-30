@@ -1,5 +1,5 @@
 # myCal
-A REST API to manage calendar events.
+A REST service to manage calendar events.
 ## API
 ### POST
 #### `/api/1.0/users/new` - Create a new user.
@@ -31,3 +31,12 @@ This endpoint simply returns a list of all the users in JSON format.
 
 #### `/api/1.0/:user/events` - Get a list of a user's events.
 This endpoint simply returns a list of all the events for the given user in JSON format.
+
+### PUT
+#### `/api/1.0/user/edit` - Edit a user's username
+- data: newname = a new username (two or more characters).
+
+
+### DELETE
+#### `/api/1.0/user/remove` - Delete a user
+This endpoint will delete a user, but not their events.
